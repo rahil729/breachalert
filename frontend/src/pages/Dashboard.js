@@ -11,12 +11,14 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
+useEffect(() => {
     if (!token) {
       navigate("/");
       return;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     fetchMonitoredEmails();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, navigate]);
 
   const fetchMonitoredEmails = async () => {
