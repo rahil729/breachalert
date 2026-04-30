@@ -29,7 +29,7 @@ console.log("MONGO_URL =", MONGO_URL);
 const app = express();
 // CORS - Restrict to frontend origins only (NOT open to all)
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || "http://localhost:3000",
+  origin: ["http://localhost:3000", "https://breachalert-frontend.vercel.app"],
   credentials: true,
 };
 app.use(cors(corsOptions));
