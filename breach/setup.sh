@@ -1,18 +1,18 @@
-#!/bin/bash
-# Railway multi-service setup: Backend API + Frontend static serve + DB/Redis
+#!/bin/sh
+set -e
 
-# Backend (FastAPI)
+echo "Setting up BreachAlert for production..."
+
+# Backend setup
 cd backend
 pip install -r requirements.txt
-python -c "from app.database import engine; from app import models; models.Base.metadata.create_all(bind=engine)"
-uvicorn app.main:app --host 0.0.0.0 --port $PORT --reload &
+alembic upgrade head  # if using migrations
 
-# Frontend (serve built React)
+# Frontend build
 cd ../frontend
 npm ci --only=production
 npm run build
-npx serve -s dist -l $PORT2 &
 
-# Wait for services
-wait
+# Create symlinks or adjust paths if needed
+echo "Setup complete. Railway will handle services."
 
